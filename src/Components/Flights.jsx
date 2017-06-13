@@ -1,9 +1,10 @@
 import React from 'react';
+import SearchBox from './Search_Box.jsx';
 
 
 const Flights = () => (
   <div>
-    Home    
+    <SearchBox />    
   </div>
   )
 
