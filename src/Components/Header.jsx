@@ -12,7 +12,7 @@ const Header = () => (
         </Navbar.Header>
         <Nav>
             <NavItem eventKey={1} href="#">Link</NavItem>
-            <NavItem eventKey={2} href="#">Link</NavItem>
+            <NavItem eventKey={2} href="#">Con</NavItem>
         </Nav>
     </Navbar>
 )
