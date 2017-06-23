@@ -6,7 +6,7 @@ class SearchBox extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {origin: null, destination: null}
+        this.state = {origin: '', destination: ''}
     }
 
     render() {
