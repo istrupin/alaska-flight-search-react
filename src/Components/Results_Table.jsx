@@ -16,9 +16,8 @@ class MyTextCell extends React.Component {
     }
 }
 
-class MyDateCell extends React.Component {
+const MyDateCell = ({ rowIndex, field, data, ...props }) => ({
     render() {
-        const { rowIndex, field, data, ...props } = this.props;
         const date = data[rowIndex][field];
         return (
             <Cell {...props}>
@@ -26,7 +25,7 @@ class MyDateCell extends React.Component {
             </Cell>
         );
     }
-}
+})
 
 // const MyDateCell = ({rowIndex, field, data, col, ...props}) => (
 //   <Cell {...props}>
@@ -56,7 +55,7 @@ class ResultsTable extends React.Component {
                 rowsCount={this.state.myTableData.length}
                 rowHeight={50}
                 headerHeight={50}
-                width={1000}
+                width={1050}
                 height={500}>
                 <Column
                     header={<Cell>From</Cell>}
@@ -69,7 +68,7 @@ class ResultsTable extends React.Component {
                     width={100}
                 />
                 <Column
-                    header={<Cell>Email</Cell>}
+                    header={<Cell>To</Cell>}
                     cell={
                         <MyTextCell
                             data={this.state.myTableData}
@@ -120,7 +119,7 @@ class ResultsTable extends React.Component {
                             field="MainCabinPrice"
                         />
                     }
-                    width={125}
+                    width={150}
                 />
 
                 <Column
@@ -131,7 +130,7 @@ class ResultsTable extends React.Component {
                             field="FirstClassPrice"
                         />
                     }
-                    width={125}
+                    width={150}
                 />
 
             </Table>

@@ -27,12 +27,16 @@ class Flights extends Component {
         });
     }
 
+    flightSearch(origin, destination){
+        console.log(`origin: ${origin}, destination: ${destination}`);
+    }
+
 
     render() {
         return (
             <div>
                 <div>
-                    <SearchBox />
+                    <SearchBox onSearchTermsChange={this.flightSearch} />
                 </div>
 
                 <br />
