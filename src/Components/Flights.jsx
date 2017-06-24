@@ -26,22 +26,18 @@ class Flights extends Component {
         fetch('http://localhost:49868/api/flights').then((res) => res.json())
             .then((data) => {
                 this.setState({ flights: data, filteredFlights: data });
-                //console.log(this.state.flights);
             });
     }
 
     flightSearch(origin, destination) {
         console.log(`origin: ${origin}, destination: ${destination}`);
-        this.setState({filteredFlights: this.state.flights});
-        if (true) {
-            this.setState({
-                filteredFlights: this.state.flights.filter(function (el) {
-                    return (el.From.includes(origin) || !origin) &&
+        // this.setState({ filteredFlights: this.state.flights });
+        this.setState({
+            filteredFlights: this.state.flights.filter(function (el) {
+                return (el.From.includes(origin) || !origin) &&
                     (el.To.includes(destination) || !destination);
-                })
-            });
-        }
-
+            })
+        });
     }
 
 
