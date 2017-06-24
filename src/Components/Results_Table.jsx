@@ -16,18 +16,19 @@ class MyTextCell extends React.Component {
     }
 }
 
-const MyDateCell = ({ rowIndex, field, data, ...props }) => ({
+class MyDateCell extends React.Component{
     render() {
-        const date = data._data[rowIndex][field];
+        const { rowIndex, field, data, ...props } = this.props;
+        
+        const date = data.getObjectAt(rowIndex)[field];
 
         return (
             <Cell {...props}>
                 {moment(date).format('h:mm A')}
-
             </Cell>
         );
     }
-})
+}
 
 //begin sort stuff
 const SortTypes = {
@@ -53,7 +54,7 @@ class DataListWrapper {
 
     getObjectAt(index) {
 
-        var sortedIdx = this._indexMap[index];
+        let sortedIdx = this._indexMap[index];
         return this._data[sortedIdx];
 
     }
@@ -65,7 +66,7 @@ class SortHeaderCell extends React.Component {
         this._onSortChange = this._onSortChange.bind(this);
     }
     render() {
-        var { sortDir, children, ...props } = this.props;
+        let { sortDir, children, ...props } = this.props;
         return (
             <Cell {...props}>
                 <a onClick={this._onSortChange}>
@@ -136,7 +137,10 @@ class ResultsTable extends React.Component {
             if (sortVal !== 0 && sortDir === SortTypes.ASC) {
                 sortVal = sortVal * -1;
             }
+            console.log('datetime compare', valueA>valueB, valueA, valueB);
+            console.log('sortedval', sortVal);
             return sortVal;
+
         });
 
         this.setState({
@@ -245,7 +249,14 @@ class ResultsTable extends React.Component {
                     />
 
                     <Column
-                        header={<Cell>Main Cabin Price</Cell>}
+                        columnKey='MainCabinPrice'
+                    
+                        header={
+                            <SortHeaderCell
+                                onSortChange={this._onSortChange}
+                                sortDir={colSortDirs.MainCabinPrice}>
+                                Main Cabin Price
+                                </SortHeaderCell>}
                         cell={
                             <MyTextCell
                                 data={this.state.sortedDataList}
@@ -256,7 +267,14 @@ class ResultsTable extends React.Component {
                     />
 
                     <Column
-                        header={<Cell>First Class Price</Cell>}
+                        columnKey='FirstClassPrice'
+                    
+                         header={
+                            <SortHeaderCell
+                                onSortChange={this._onSortChange}
+                                sortDir={colSortDirs.FirstClassPrice}>
+                                First Class Price
+                                </SortHeaderCell>}
                         cell={
                             <MyTextCell
                                 data={this.state.sortedDataList}
