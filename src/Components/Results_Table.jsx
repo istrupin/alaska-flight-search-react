@@ -8,7 +8,6 @@ import * as moment from 'moment';
 class MyTextCell extends React.Component {
     render() {
         const { rowIndex, field, data, ...props } = this.props;
-        console.log('sorted data in cell', data);
         return (
             <Cell {...props}>
                 {data.getObjectAt(rowIndex)[field]}
@@ -24,7 +23,6 @@ const MyDateCell = ({ rowIndex, field, data, ...props }) => ({
         return (
             <Cell {...props}>
                 {moment(date).format('h:mm A')}
-                {/*{console.log('fuaaaark',data, 'indx', rowIndex)}*/}
 
             </Cell>
         );
@@ -56,12 +54,8 @@ class DataListWrapper {
     getObjectAt(index) {
 
         var sortedIdx = this._indexMap[index];
-        console.log('sorted index:', this);
         return this._data[sortedIdx];
 
-        // return this._data.getObjectAt(
-        //     this._indexMap[index],
-        // );
     }
 }
 
@@ -94,17 +88,11 @@ class SortHeaderCell extends React.Component {
 }
 
 
-// const MyDateCell = ({rowIndex, field, data, col, ...props}) => (
-//   <Cell {...props}>
-//     {data[rowIndex][field].toLocaleString()}
-//   </Cell>
-// );
+
 
 class ResultsTable extends React.Component {
     constructor(props) {
         super(props);
-
-
 
         this.state = {
             myTableData: [],
@@ -119,28 +107,22 @@ class ResultsTable extends React.Component {
 
     componentWillReceiveProps(props) {
 
+        this._defaultSortIndexes = [];
         var size = props.flights.length;
+        console.log('length is now', size);
+        console.log('state',this.state);
         for (var index = 0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
 
+        console.log('default indexes', this._defaultSortIndexes)
         this.setState({ myTableData: props.flights, sortedDataList: new DataListWrapper(this._defaultSortIndexes, props.flights) }) // This will update your component.
     }
-
-    componentDidUpdate() {
-        var size = this.state.myTableData.length;
-        for (var index = 0; index < size; index++) {
-            this._defaultSortIndexes.push(index);
-        }
-
-        //  this.setState({ sortedDataList: new DataListWrapper(this._defaultSortIndexes, this.props.flights) }) // This will update your component.
-
-    }
-
 
 
     _onSortChange(columnKey, sortDir) {
         var sortIndexes = this._defaultSortIndexes.slice();
+        console.log('indexes', sortIndexes);
         sortIndexes.sort((indexA, indexB) => {
             var valueA = this.state.myTableData[indexA][columnKey];
             var valueB = this.state.myTableData[indexB][columnKey];
@@ -163,7 +145,6 @@ class ResultsTable extends React.Component {
                 [columnKey]: sortDir,
             },
         });
-        console.log('new state', this.state)
     }
 
 
@@ -171,8 +152,6 @@ class ResultsTable extends React.Component {
     render() {
         var { sortedDataList, colSortDirs } = this.state;
         return (
-            <div>
-                <button>sort</button>
                 <Table
                     rowsCount={this.state.myTableData.length}
                     rowHeight={50}
@@ -288,16 +267,9 @@ class ResultsTable extends React.Component {
                     />
 
                 </Table>
-            </div>
         );
     }
 }
 
-// const ResultsTable = (props) => {
-//     console.log('props are', props);
-//     return (
-//         <div>hello</div>
-//     )
-// }
 
 export default ResultsTable;
