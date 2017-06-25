@@ -31,7 +31,6 @@ class Flights extends Component {
 
     flightSearch(origin, destination) {
         console.log(`origin: ${origin}, destination: ${destination}`);
-        // this.setState({ filteredFlights: this.state.flights });
         this.setState({
             filteredFlights: this.state.flights.filter(function (el) {
                 return (el.From.includes(origin) || !origin) &&

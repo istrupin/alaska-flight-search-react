@@ -51,10 +51,8 @@ class DataListWrapper {
     }
 
     getObjectAt(index) {
-
         let sortedIdx = this._indexMap[index];
         return this._data[sortedIdx];
-
     }
 }
 
@@ -64,7 +62,7 @@ class SortHeaderCell extends React.Component {
         this._onSortChange = this._onSortChange.bind(this);
     }
     render() {
-        let { sortDir, children, ...props } = this.props;
+        let {onSortChange ,sortDir, children, ...props } = this.props;
         return (
             <Cell {...props}>
                 <a onClick={this._onSortChange}>
@@ -87,8 +85,6 @@ class SortHeaderCell extends React.Component {
 }
 
 
-
-
 class ResultsTable extends React.Component {
     constructor(props) {
         super(props);
@@ -108,20 +104,16 @@ class ResultsTable extends React.Component {
 
         this._defaultSortIndexes = [];
         var size = props.flights.length;
-        console.log('length is now', size);
-        console.log('state',this.state);
         for (var index = 0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
 
-        console.log('default indexes', this._defaultSortIndexes)
         this.setState({ myTableData: props.flights, sortedDataList: new DataListWrapper(this._defaultSortIndexes, props.flights) }) // This will update your component.
     }
 
 
     _onSortChange(columnKey, sortDir) {
         var sortIndexes = this._defaultSortIndexes.slice();
-        console.log('indexes', sortIndexes);
         sortIndexes.sort((indexA, indexB) => {
             var valueA = this.state.myTableData[indexA][columnKey];
             var valueB = this.state.myTableData[indexB][columnKey];
@@ -135,8 +127,6 @@ class ResultsTable extends React.Component {
             if (sortVal !== 0 && sortDir === SortTypes.ASC) {
                 sortVal = sortVal * -1;
             }
-            console.log('datetime compare', valueA>valueB, valueA, valueB);
-            console.log('sortedval', sortVal);
             return sortVal;
 
         });
