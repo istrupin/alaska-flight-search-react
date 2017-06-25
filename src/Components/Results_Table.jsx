@@ -5,15 +5,13 @@ import { FixedDataTable, Cell, Column, Table } from 'fixed-data-table';
 import * as moment from 'moment';
 
 
-class MyTextCell extends React.Component {
-    render() {
-        const { rowIndex, field, data, ...props } = this.props;
+const MyTextCell = ({ rowIndex, field, data, ...props }) => {
+    
         return (
             <Cell {...props}>
                 {data.getObjectAt(rowIndex)[field]}
             </Cell>
         );
-    }
 }
 
 class MyDateCell extends React.Component{
