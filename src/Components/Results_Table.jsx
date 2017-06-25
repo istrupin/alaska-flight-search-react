@@ -6,7 +6,6 @@ import * as moment from 'moment';
 
 
 const MyTextCell = ({ rowIndex, field, data, ...props }) => {
-    
         return (
             <Cell {...props}>
                 {data.getObjectAt(rowIndex)[field]}
@@ -62,7 +61,9 @@ class SortHeaderCell extends React.Component {
         this._onSortChange = this._onSortChange.bind(this);
     }
     render() {
-        let {onSortChange ,sortDir, children, ...props } = this.props;
+        console.log('firstproprs',this.props);
+        let {onSortChange, sortDir, children, ...props } = this.props;
+        console.log(this.props)
         return (
             <Cell {...props}>
                 <a onClick={this._onSortChange}>
@@ -101,13 +102,11 @@ class ResultsTable extends React.Component {
     }
 
     componentWillReceiveProps(props) {
-
         this._defaultSortIndexes = [];
         var size = props.flights.length;
         for (var index = 0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-
         this.setState({ myTableData: props.flights, sortedDataList: new DataListWrapper(this._defaultSortIndexes, props.flights) }) // This will update your component.
     }
 
