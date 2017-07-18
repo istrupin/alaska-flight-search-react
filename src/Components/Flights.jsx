@@ -25,12 +25,12 @@ class Flights extends Component {
 
 
     getFlightData(){
-        const flightsPromise = fetch('http://localhost:49868/api/flights').then((res) => res.json())
+        const flightsPromise = fetch('/api/flights').then((res) => res.json())
             .then((data) => {
                 return data;
             });
 
-        const airportsPromise = fetch('http://localhost:49868/api/airports').then((res) => res.json())
+        const airportsPromise = fetch('/api/airports').then((res) => res.json())
             .then((data => {
                 return data;
             }));

@@ -8,7 +8,7 @@ const Header = () => (
     <Navbar class="navbar navbar-inverse navbar-fixed-top">
         <Navbar.Header>
             <Navbar.Brand>
-            <a href="~/">Flights</a>
+                <a href="~/">Flights</a>
             </Navbar.Brand>
         </Navbar.Header>
 
