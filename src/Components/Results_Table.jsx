@@ -61,9 +61,7 @@ class SortHeaderCell extends React.Component {
         this._onSortChange = this._onSortChange.bind(this);
     }
     render() {
-        console.log('firstproprs',this.props);
         let {onSortChange, sortDir, children, ...props } = this.props;
-        console.log(this.props)
         return (
             <Cell {...props}>
                 <a onClick={this._onSortChange}>

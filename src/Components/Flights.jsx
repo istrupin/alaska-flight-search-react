@@ -14,19 +14,30 @@ class Flights extends Component {
 
         this.state = {
             flights: [],
-            filteredFlights: []
+            filteredFlights: [],
+            airports: []
         };
 
         this.flightSearch = this.flightSearch.bind(this);
 
-        this.getFlights();
+        this.getFlightData();
     }
 
-    getFlights() {
-        fetch('http://localhost:49868/api/flights').then((res) => res.json())
+
+    getFlightData(){
+        const flightsPromise = fetch('http://localhost:49868/api/flights').then((res) => res.json())
             .then((data) => {
-                this.setState({ flights: data, filteredFlights: data });
+                return data;
             });
+
+        const airportsPromise = fetch('http://localhost:49868/api/airports').then((res) => res.json())
+            .then((data => {
+                return data;
+            }));
+
+            Promise.all([flightsPromise, airportsPromise]).then(values => {
+                this.setState({flights: values[0], filteredFlights: values[0], airports: values[1]})
+            })
     }
 
     flightSearch(origin, destination) {
@@ -44,7 +55,7 @@ class Flights extends Component {
         return (
             <div>
                 <div>
-                    <SearchBox onSearchTermsChange={this.flightSearch} />
+                    <SearchBox onSearchTermsChange={this.flightSearch} airports={this.state.airports} />
                 </div>
 
                 <br />

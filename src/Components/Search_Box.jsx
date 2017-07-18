@@ -16,12 +16,12 @@ class SearchBox extends Component {
                     <div className="col-md-2 col-md-push-1">
                         <FormGroup>
                             <ControlLabel>Origin Airport</ControlLabel>
-                            <FormControl
-                                type="text"
-                                placeholder="Enter text"
+                            <FormControl componentClass="select"
                                 value={this.state.origin}
                                 onChange={(e) => this.onInputChange(e.target.value,this.state.destination)}
-                            />
+                            >
+                                {this.renderAirports()}
+                            </FormControl>
                             <FormControl.Feedback />
                         </FormGroup>
                     </div>
@@ -29,11 +29,14 @@ class SearchBox extends Component {
                         <FormGroup>
                             <ControlLabel>Destination Airport</ControlLabel>
                             <FormControl
-                                type="text"
+                                componentClass="select"
                                 placeholder="Enter text"
                                 value={this.state.destination}
                                 onChange={(e) => this.onInputChange(this.state.origin, e.target.value)}
-                            />
+                            >
+                             {this.renderAirports()}
+
+                            </FormControl>
                             <FormControl.Feedback />
                         </FormGroup>
                     </div>
@@ -48,6 +51,10 @@ class SearchBox extends Component {
         
         this.setState({origin: org, destination: dst});
         this.props.onSearchTermsChange(org, dst);
+    }
+
+    renderAirports(){
+        return this.props.airports.map(x => <option value={x.Code}>{x.Name}</option>);
     }
 }
 
