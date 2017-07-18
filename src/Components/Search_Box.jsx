@@ -17,9 +17,9 @@ class SearchBox extends Component {
                         <FormGroup>
                             <ControlLabel>Origin Airport</ControlLabel>
                             <FormControl componentClass="select"
-                                value={this.state.origin}
                                 onChange={(e) => this.onInputChange(e.target.value,this.state.destination)}
                             >
+                                <option value=""> Select Origin </option>
                                 {this.renderAirports()}
                             </FormControl>
                             <FormControl.Feedback />
@@ -31,9 +31,10 @@ class SearchBox extends Component {
                             <FormControl
                                 componentClass="select"
                                 placeholder="Enter text"
-                                value={this.state.destination}
                                 onChange={(e) => this.onInputChange(this.state.origin, e.target.value)}
                             >
+                                <option value=""> Select Destination </option>
+                            
                              {this.renderAirports()}
 
                             </FormControl>
