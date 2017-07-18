@@ -1,19 +1,17 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Flights from './Flights.jsx';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
 
 
 const Header = () => (
-    <Navbar>
+    <Navbar class="navbar navbar-inverse navbar-fixed-top">
         <Navbar.Header>
             <Navbar.Brand>
-                <a href="#">Alaska Airlines</a>
+            <a href="~/">Flights</a>
             </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
-            <NavItem eventKey={1} href="#">Link</NavItem>
-            <NavItem eventKey={2} href="#">Con</NavItem>
-        </Nav>
+
     </Navbar>
 )
 
